@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { LiquidField } from "@/components/three/liquid-field";
 import { ArrowDown, ArrowUpRight, CalendarDays, Languages, Menu, Moon, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -176,82 +177,77 @@ function Signal() {
 function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, .78], [1, 0]);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rx = useSpring(mx, { stiffness: 70, damping: 20 });
+  const ry = useSpring(my, { stiffness: 70, damping: 20 });
+  const fieldX = useTransform(rx, [-.5, .5], [-18, 18]);
+  const fieldY = useTransform(ry, [-.5, .5], [-14, 14]);
 
-  return <section id="top" ref={ref} className="theme-dark-surface relative min-h-screen overflow-hidden border-b border-white/10 bg-[#08090a]">
-    <div className="noise absolute inset-0 opacity-40" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_34%,rgba(210,215,220,.10),transparent_22%),radial-gradient(circle_at_16%_82%,rgba(120,130,140,.08),transparent_28%)]" />
-    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-    <motion.div style={{ y, opacity }} className="relative z-10 mx-auto grid min-h-screen max-w-[1500px] items-end gap-12 px-5 pb-10 pt-32 sm:px-8 sm:pb-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,.55fr)] lg:gap-16 lg:px-10 lg:pb-16">
-      <div className="max-w-[860px]">
-        <p className="mb-7 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.28em] text-white/40">
-          <span className="h-px w-9 bg-white/50" />Software · Systems · AI · IoT
-        </p>
+  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    mx.set((event.clientX - rect.left) / rect.width - .5);
+    my.set((event.clientY - rect.top) / rect.height - .5);
+  };
 
-        <div className="overflow-hidden">
-          <h1 className="max-w-[780px] text-[clamp(2.7rem,5.15vw,6rem)] font-light leading-[.9] tracking-[-.065em]">
-            Je conçois des logiciels<br />
-            <span className="text-white/38">qui font avancer le réel.</span>
+  const resetPointer = () => { mx.set(0); my.set(0); };
+
+  return <section id="top" ref={ref} onPointerMove={handlePointerMove} onPointerLeave={resetPointer} className="relative min-h-screen overflow-hidden border-b border-white/10 bg-[#070809] text-white">
+    <div className="noise absolute inset-0 opacity-30" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_46%,rgba(210,198,176,.11),transparent_26%),radial-gradient(circle_at_85%_20%,rgba(140,150,165,.06),transparent_25%)]" />
+
+    <motion.div style={{ y, opacity }} className="relative z-10 mx-auto min-h-screen max-w-[1500px] px-5 pb-7 pt-28 sm:px-8 lg:px-10">
+      <div className="absolute left-5 top-28 flex items-center gap-3 font-mono text-[8px] uppercase tracking-[.26em] text-white/38 sm:left-8 lg:left-10">
+        <span className="h-px w-8 bg-white/40" /> Software engineering · Systems · AI · IoT
+      </div>
+
+      <div className="grid min-h-[calc(100vh-120px)] items-center gap-8 lg:grid-cols-[.82fr_1.18fr] lg:gap-0">
+        <div className="relative z-40 max-w-[610px] pb-14 pt-20 lg:pb-0 lg:pt-10">
+          <p className="mb-6 font-mono text-[8px] uppercase tracking-[.24em] text-white/38">Alade ADECHI / Ingénieur informatique</p>
+          <h1 className="text-white text-[clamp(3.2rem,6vw,7.1rem)] font-light leading-[.83] tracking-[-.07em]">
+            <span className="block">Je construis.</span>
+            <span className="block text-white/38">Je connecte.</span>
+            <span className="block">Je rends réel.</span>
           </h1>
-        </div>
-
-        <div className="mt-8 grid max-w-3xl gap-8 border-t border-white/12 pt-6 sm:grid-cols-[1fr_auto] sm:items-end">
-          <p className="max-w-xl text-[12px] leading-5 text-white/48">
-            Ingénieur informatique orienté produit et systèmes : architecture, développement, automatisation et intégration de technologies qui doivent réellement fonctionner ensemble.
+          <p className="mt-8 max-w-md text-[12px] leading-6 text-white/55">
+            Logiciel, architecture système, automatisation et technologies connectées — du problème à une solution qui fonctionne réellement.
           </p>
-          <div className="flex items-center gap-3">
-            <a href="#projects" className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 font-mono text-[9px] uppercase tracking-[.14em] text-black transition hover:bg-white/90">
-              Voir les projets <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full border border-white/16 px-4 py-2.5 font-mono text-[9px] uppercase tracking-[.14em] text-white/70 transition hover:border-white/35 hover:text-white">
-              Me contacter <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#projects" className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-mono text-[9px] uppercase tracking-[.14em] text-black transition hover:bg-white/90">Explorer <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></a>
+            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 font-mono text-[9px] uppercase tracking-[.14em] text-white/70 transition hover:border-white/45 hover:text-white">Contact <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></a>
+          </div>
+        </div>
+
+        <div className="relative z-10 flex min-h-[540px] items-center justify-center lg:min-h-[720px]">
+          <motion.div style={{ x: fieldX, y: fieldY }} className="relative aspect-square w-[min(82vw,720px)] overflow-hidden rounded-full">
+            <LiquidField />
+            <div className="absolute inset-[8%] rounded-full border border-white/[.10]" />
+            <motion.div animate={{ rotate:360 }} transition={{ duration:26, repeat:Infinity, ease:"linear" }} className="absolute inset-[14%] rounded-full border border-dashed border-white/[.16]" />
+            <motion.div animate={{ rotate:-360 }} transition={{ duration:36, repeat:Infinity, ease:"linear" }} className="absolute inset-[22%] rounded-full border border-white/[.10]" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="font-mono text-[8px] uppercase tracking-[.3em] text-white/42">Engineering</div>
+                <div className="mt-2 text-[clamp(2rem,4vw,4.6rem)] font-light tracking-[-.08em]">AD</div>
+                <div className="mt-2 font-mono text-[7px] uppercase tracking-[.28em] text-white/28">Build · Connect · Evolve</div>
+              </div>
+            </div>
+            <motion.span animate={{ rotate:360 }} transition={{ duration:14, repeat:Infinity, ease:"linear" }} className="absolute left-1/2 top-[5%] block size-2 -translate-x-1/2 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,.8)]" />
+          </motion.div>
+
+          <div className="pointer-events-none absolute bottom-[8%] right-[2%] hidden w-[290px] border-t border-white/15 pt-3 font-mono text-[7px] uppercase tracking-[.18em] text-white/30 lg:block">
+            <div className="flex justify-between"><span>Software</span><span>Systems</span><span>AI</span></div>
+            <div className="mt-3 flex justify-between"><span>IoT</span><span>Automation</span><span>VoIP</span></div>
           </div>
         </div>
       </div>
 
-      <div className="relative hidden h-[46vh] min-h-[350px] lg:block">
-        <motion.div
-          initial={{ opacity: 0, scale: .96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: .25, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute right-0 top-0 text-right"
-        >
-          <p className="font-mono text-[8px] uppercase tracking-[.22em] text-white/32">AL · ADECHI / ENGINEERING</p>
-          <div className="mt-2 text-[15vw] font-light leading-[.68] tracking-[-.1em] text-white" style={{ opacity: .04 }}>01</div>
-          <div className="mt-[-10px] flex items-center justify-end gap-3 font-mono text-[8px] uppercase tracking-[.2em] text-white/28">
-            <span>Software</span><span className="h-px w-8 bg-white/20" /><span>Systems</span>
-          </div>
-        </motion.div>
-
-        <div className="absolute bottom-3 right-0 w-full max-w-[360px]">
-          <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[.17em] text-white/28">
-            <span>Architecture</span><span>Integration</span><span>Delivery</span>
-          </div>
-          <div className="mt-5 flex items-end gap-1">
-            {Array.from({ length: 28 }).map((_, index) => (
-              <motion.span
-                key={index}
-                className="h-px flex-1 bg-white/20"
-                animate={{ scaleY: index % 5 === 0 ? [1, 5, 1] : [1, 2, 1], opacity: index % 5 === 0 ? [.35, .9, .35] : [.16, .35, .16] }}
-                transition={{ duration: 1.8 + (index % 4) * .18, repeat: Infinity, delay: index * .04, ease: "easeInOut" }}
-              />
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[8px] uppercase tracking-[.18em] text-white/25">
-            <span>Build / Connect / Ship</span><span>01—04</span>
-          </div>
-        </div>
-      </div>
+      <div className="absolute bottom-6 left-5 flex items-center gap-3 font-mono text-[8px] uppercase tracking-[.18em] text-white/28 sm:left-8 lg:left-10"><ArrowDown className="size-3" /> Scroll to explore</div>
+      <div className="absolute bottom-6 right-5 hidden font-mono text-[8px] uppercase tracking-[.18em] text-white/22 sm:block lg:right-10">Interactive field / 01</div>
     </motion.div>
-
-    <div className="absolute bottom-5 left-5 hidden items-center gap-3 font-mono text-[8px] uppercase tracking-[.18em] text-white/25 sm:flex lg:left-10">
-      <ArrowDown className="size-3" /> Scroll to explore
-    </div>
   </section>;
 }
-
 function About() {
   return <section id="about" className="relative border-b border-white/10 bg-[#f0eee9] px-5 py-28 text-[#111] sm:px-8 lg:px-10 lg:py-40"><div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-[.32fr_1fr]"><p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-black/42"><span className="h-px w-7 bg-black/25" />À propos</p><div><h2 className="max-w-5xl text-[clamp(2.4rem,5vw,6rem)] font-light leading-[.9] tracking-[-.06em]">Je travaille à l'endroit où <span className="font-medium text-[#222]">le logiciel</span> rencontre <span className="text-black/35">le réel.</span></h2><div className="mt-16 grid max-w-4xl gap-10 border-t border-black/15 pt-7 text-[13px] leading-6 text-black/55 md:grid-cols-2"><p>Formation en Informatique Industrielle et Maintenance, puis une pratique qui traverse développement, automatisation, électronique, IA et infrastructures.</p><p>Je construis des systèmes complets : comprendre le problème, concevoir l'architecture, prototyper, intégrer et rendre l'ensemble fiable.</p></div></div></div></section>;
 }
