@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { LiquidField } from "@/components/three/liquid-field";
-import { ArrowDown, ArrowUpRight, CalendarDays, Languages, Menu, Moon, Sun, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarDays, Languages, Mail, MapPin, Menu, Moon, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
@@ -261,7 +261,70 @@ function Path() {
 }
 
 function Contact() {
-  return <section id="contact" className="theme-dark-surface relative overflow-hidden bg-[#08090a] px-5 py-32 text-white sm:px-8 lg:px-10 lg:py-48"><div className="mx-auto max-w-[1500px]"><p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-white/38"><span className="h-px w-7 bg-white/50" />Contact</p><div className="mt-12 grid gap-14 lg:grid-cols-[1fr_.4fr]"><h2 className="max-w-5xl text-[clamp(3.3rem,7vw,8rem)] font-light leading-[.82] tracking-[-.075em]">Construisons<br/><span className="text-white/35">quelque chose</span><br/>de réel.</h2><div className="self-end border-t border-white/15 pt-5"><p className="text-[12px] leading-5 text-white/45">Pour un projet, un stage, une collaboration technique ou une opportunité académique.</p><a href="mailto:alade.adechi@gmail.com" className="mt-8 inline-flex items-center gap-3 border-b border-white/30 pb-2 text-[11px] uppercase tracking-[.15em] transition-colors hover:border-white">Écrire un message <ArrowUpRight className="size-3"/></a></div></div><footer className="mt-28 flex justify-between border-t border-white/10 pt-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/25"><span>Alade Adechi · Ingénieur informatique</span><a href="#top">Retour en haut ↑</a></footer></div></section>;
+  const footerLinks = [
+    ["Accueil", "#top"],
+    ["À propos", "#about"],
+    ["Projets", "#projects"],
+    ["Parcours", "#path"],
+    ["Contact", "#contact"],
+  ];
+
+  return <section id="contact" className="theme-dark-surface relative overflow-hidden bg-[#08090a] px-5 py-28 text-white sm:px-8 lg:px-10 lg:py-36">
+    <div className="mx-auto max-w-[1500px]">
+      <div className="border-b border-white/10 pb-20">
+        <p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-white/38"><span className="h-px w-7 bg-white/50" />Contact</p>
+        <div className="mt-12 grid gap-14 lg:grid-cols-[1fr_.48fr] lg:items-end">
+          <h2 className="max-w-5xl text-[clamp(3.3rem,7vw,8rem)] font-light leading-[.82] tracking-[-.075em]">
+            Construisons<br /><span className="text-white/35">quelque chose</span><br />de réel.
+          </h2>
+          <div className="border-t border-white/15 pt-5">
+            <p className="max-w-sm text-[12px] leading-5 text-white/45">Pour un projet, une collaboration technique, une opportunité professionnelle ou académique.</p>
+            <a href="mailto:alade.adechi@gmail.com" className="group mt-8 inline-flex items-center gap-3 border-b border-white/25 pb-2 text-[11px] uppercase tracking-[.15em] transition-colors hover:border-white">alade.adechi@gmail.com <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/></a>
+          </div>
+        </div>
+      </div>
+
+      <footer className="pt-12">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.1fr_.65fr_.65fr_.8fr]">
+          <div>
+            <a href="#top" className="group inline-flex items-center gap-3" aria-label="Retour à l'accueil">
+              <span className="portfolio-logo-mark flex size-9 items-center justify-center rounded-full text-black transition-transform duration-300 group-hover:scale-105">
+                <span className="text-[11px] font-semibold tracking-[-.08em]">AD</span>
+              </span>
+              <span><span className="block text-[11px] font-medium tracking-[.04em]">Alade ADECHI</span><span className="mt-1 block font-mono text-[7px] uppercase tracking-[.17em] text-white/30">Ingénieur informatique</span></span>
+            </a>
+            <p className="mt-6 max-w-xs text-[11px] leading-5 text-white/35">Software · Systems · AI · IoT · Automation · VoIP</p>
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[8px] uppercase tracking-[.22em] text-white/25">Navigation</p>
+            <nav className="grid gap-2">
+              {footerLinks.map(([label, href]) => <a key={href} href={href} className="w-fit text-[11px] text-white/55 transition-colors hover:text-white">{label}</a>)}
+            </nav>
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[8px] uppercase tracking-[.22em] text-white/25">Présence</p>
+            <div className="space-y-3 text-[11px] text-white/45">
+              <p className="flex items-center gap-2"><MapPin className="size-3 text-white/25" />Cotonou, Bénin</p>
+              <a href="mailto:alade.adechi@gmail.com" className="flex items-center gap-2 transition-colors hover:text-white"><Mail className="size-3 text-white/25" />Email</a>
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[8px] uppercase tracking-[.22em] text-white/25">Disponibilité</p>
+            <p className="flex items-center gap-2 text-[11px] text-white/55"><span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(74,222,128,.55)]" />Ouvert aux opportunités</p>
+            <p className="mt-3 max-w-[210px] text-[10px] leading-4 text-white/25">Projets techniques, collaborations et opportunités en ingénierie logicielle.</p>
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/24 sm:flex-row sm:items-center sm:justify-between">
+          <span>© 2026 Alade Adechi. Tous droits réservés.</span>
+          <a href="#top" className="group inline-flex items-center gap-2 transition-colors hover:text-white/60">Retour en haut <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></a>
+        </div>
+      </footer>
+    </div>
+  </section>;
 }
 
 export function Portfolio() {
