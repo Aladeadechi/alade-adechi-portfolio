@@ -6,7 +6,7 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bot, BriefcaseBusiness, CalendarDays, ChevronDown, Code2, Cpu, Droplets, GraduationCap, Languages, Mail, Menu, School, Sparkles, Trophy, Volume2, VolumeX, Wrench, X, type LucideIcon } from "lucide-react";
-import { siArduino, siC, siCplusplus, siDocker, siEspressif, siGithub, siIntel, siLinux, siNextdotjs, siPython, siRaspberrypi, siRos, siTypescript } from "simple-icons";
+import { siArduino, siC, siCplusplus, siDocker, siEspressif, siFigma, siFlutter, siGit, siGithub, siHomeassistant, siHtml5, siIntel, siLinux, siMqtt, siNextdotjs, siNginx, siNodedotjs, siPostgresql, siPostman, siProteus, siPython, siRaspberrypi, siReact, siRos, siSiemens, siSupabase, siTailwindcss, siThreedotjs, siTypescript, siUbuntu, siVercel } from "simple-icons";
 import { useEffect, useRef, useState } from "react";
 
 function Nav() {
@@ -43,14 +43,22 @@ function Nav() {
   }, [language]);
 
   useEffect(() => {
-    const sectionIds = ["top", "projects", "path", "contact", "services", "networks"];
+    const sectionIds = ["top", "projects", "path", "services", "contact"];
     const updateActiveSection = () => {
-      const marker = window.scrollY + window.innerHeight * 0.42;
+      const marker = window.innerHeight * 0.42;
       let current = "top";
+
       for (const id of sectionIds) {
         const section = document.getElementById(id);
-        if (section && section.offsetTop <= marker) current = id;
+        if (!section) continue;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= marker && rect.bottom > marker) {
+          current = id;
+        }
       }
+
       setActiveSection(current);
     };
 
@@ -84,55 +92,29 @@ function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4 lg:px-8">
-      <nav className={`portfolio-nav mx-auto flex h-14 max-w-[1500px] items-center justify-between rounded-full border px-1 pl-2 shadow-[0_14px_45px_rgba(0,0,0,.16)] backdrop-blur-2xl transition-colors duration-300 sm:px-2 sm:pl-4 ${theme === "dark" ? "border-white/10 bg-[#08090a]/82 text-white" : "border-black/10 bg-[#f4f1eb]/92 text-[#111]"}`}>
+      <nav className={`portfolio-nav mx-auto flex h-14 max-w-[1500px] items-center justify-between rounded-full border px-1 pl-2 shadow-[0_14px_45px_rgba(0,0,0,.16)] backdrop-blur-2xl transition-colors duration-300 max-md:rounded-none max-md:border-0 max-md:bg-transparent max-md:shadow-none max-md:backdrop-blur-none sm:px-2 sm:pl-4 ${theme === "dark" ? "border-white/10 bg-[#08090a]/82 text-white" : "border-black/10 bg-[#f4f1eb]/92 text-[#111]"}`}>
         <a href="#top" className="group flex shrink-0 items-center gap-3" aria-label="Alade ADECHI, accueil">
           <span className="portfolio-logo-mark flex size-7 items-center justify-center text-[11px] font-semibold tracking-[-.08em] sm:rounded-full sm:text-[10px]"><span>AD</span></span>
           <span className="hidden sm:flex sm:flex-col sm:gap-0.5"><span className="text-[10px] font-medium tracking-[.04em] text-white/80">Alade ADECHI</span><span className="text-[7px] uppercase tracking-[.16em] text-white/35">Ingénieur IT</span></span>
         </a>
 
         <div className="hidden items-center gap-1 md:flex">
-          <a href="#projects" className="relative px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white/52 transition hover:text-white">Projets</a>
+          <a href="#top" className={"group relative px-3 py-2 text-[9px] uppercase tracking-[.13em] transition-colors " + (activeSection === "top" ? "text-[#7fb3ff]" : "text-white/52 hover:text-white")}>Profil<span className="absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" /></a>
 
-          <div className="relative" onMouseEnter={() => setPathOpen(true)} onMouseLeave={() => setPathOpen(false)}>
-            <button
-              type="button"
-              onClick={() => setPathOpen((value) => !value)}
-              className={activeSection === "path" ? "inline-flex items-center gap-1 px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white" : "inline-flex items-center gap-1 px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white/52 transition hover:text-white"}
-            >
-              Parcours
-              <ChevronDown className={"size-3 transition-transform " + (pathOpen ? "rotate-180" : "")} />
-            </button>
+          <a href="#projects" className={"group relative px-3 py-2 text-[9px] uppercase tracking-[.13em] transition-colors " + (activeSection === "projects" ? "text-[#7fb3ff]" : "text-white/52 hover:text-white")}>Projets<span className="absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" /></a>
 
-            <AnimatePresence>
-              {pathOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  className="absolute left-1/2 top-[calc(100%+10px)] w-[230px] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/10 bg-[#101214]/96 p-2 text-white shadow-[0_22px_60px_rgba(0,0,0,.25)] backdrop-blur-2xl"
-                >
-                  <p className="px-3 pb-2 pt-2 font-mono text-[7px] uppercase tracking-[.18em] text-white/35">Parcours</p>
-                  {[["Académique", "path-academic"], ["Extra-scolaire", "path-extra"], ["Professionnel", "path-professional"]].map(([label, href], index) => (
-                    <a key={href} href={"#" + href} onClick={() => setPathOpen(false)} className="group flex items-center gap-3 rounded-xl px-3 py-3 text-[10px] uppercase tracking-[.12em] transition hover:bg-white/[.06]">
-                      <span className="font-mono text-[8px] text-white/30">0{index + 1}</span>
-                      <span className="flex-1">{label}</span>
-                      <ArrowUpRight className="size-3 text-white/25 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white/70" />
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <a href="#path" className={"group relative px-3 py-2 text-[9px] uppercase tracking-[.13em] transition-colors " + (activeSection === "path" ? "text-[#7fb3ff]" : "text-white/52 hover:text-white")}>Parcours<span className="absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" /></a>
 
-          <a href="#services" className="relative px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white/52 transition hover:text-white">Services</a>
+          <a href="#services" className={"group relative px-3 py-2 text-[9px] uppercase tracking-[.13em] transition-colors " + (activeSection === "services" ? "text-[#7fb3ff]" : "text-white/52 hover:text-white")}>Services<span className="absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" /></a>
 
           <div className="relative" onMouseEnter={() => setNetworksOpen(true)} onMouseLeave={() => setNetworksOpen(false)}>
             <button
               type="button"
               onClick={() => setNetworksOpen((value) => !value)}
-              className={activeSection === "networks" ? "inline-flex items-center gap-1 px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white" : "inline-flex items-center gap-1 px-3 py-2 text-[9px] uppercase tracking-[.13em] text-white/52 transition hover:text-white"}
+              className={"group relative inline-flex items-center gap-1 px-3 py-2 text-[9px] uppercase tracking-[.13em] transition-colors " + (activeSection === "contact" ? "text-[#7fb3ff]" : "text-white/52 hover:text-white")}
             >
               Réseaux
+              <span className="absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
               <ChevronDown className={"size-3 transition-transform " + (networksOpen ? "rotate-180" : "")} />
             </button>
 
@@ -206,26 +188,17 @@ function Nav() {
                 transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className={"absolute right-0 top-[calc(100%+12px)] w-[min(92vw,360px)] overflow-hidden rounded-[24px] border p-2 shadow-[0_24px_70px_rgba(0,0,0,.24)] backdrop-blur-2xl " + (theme === "dark" ? "border-white/10 bg-[#101214]/95 text-white" : "border-black/10 bg-[#f4f1eb]/98 text-[#111]")}
               >
+                <a onClick={() => setMenuOpen(false)} href="#top" className="flex items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
+                  <span className="flex-1">Profil</span><ArrowUpRight className="size-3 opacity-45" />
+                </a>
                 <a onClick={() => setMenuOpen(false)} href="#projects" className="flex items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
                   <span className="flex-1">Projets</span><ArrowUpRight className="size-3 opacity-45" />
                 </a>
-                <button type="button" onClick={() => setPathOpen((value) => !value)} className="flex w-full items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
-                  <span className="flex-1 text-left">Parcours</span>
-                  <ChevronDown className={"size-3 transition-transform " + (pathOpen ? "rotate-180" : "")} />
-                </button>
-                <AnimatePresence initial={false}>
-                  {pathOpen && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                      {[["Académique", "path-academic"], ["Extra-scolaire", "path-extra"], ["Professionnel", "path-professional"]].map(([label, href]) => (
-                        <a key={href} onClick={() => { setMenuOpen(false); setPathOpen(false); }} href={"#" + href} className="flex items-center gap-3 px-5 py-3 font-mono text-[8px] uppercase tracking-[.13em] text-white/55">
-                          {label}<ArrowUpRight className="size-3" />
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <a onClick={() => setMenuOpen(false)} href="#path" className="flex items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
+                  <span className="flex-1 text-left">Parcours</span><ArrowUpRight className="size-3 opacity-45" />
+                </a>
                 <a onClick={() => setMenuOpen(false)} href="#services" className="flex items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
-                  <span className="flex-1">Services</span><ArrowUpRight className="size-3 opacity-45" />
+                  <span className="flex-1 text-left">Services</span><ArrowUpRight className="size-3 opacity-45" />
                 </a>
                 <button type="button" onClick={() => setNetworksOpen((value) => !value)} className="flex w-full items-center gap-4 border-b border-current/10 px-4 py-4 text-[11px] uppercase tracking-[.13em]">
                   <span className="flex-1 text-left">Réseaux</span>
@@ -282,18 +255,42 @@ function Nav() {
 function TechMarquee() {
   const techs = [
     ["Next.js", siNextdotjs],
+    ["React", siReact],
+    ["Three.js", siThreedotjs],
     ["TypeScript", siTypescript],
-    ["Arduino", siArduino],
-    ["ROS", siRos],
+    ["Tailwind CSS", siTailwindcss],
+    ["HTML", siHtml5],
+    ["Node.js", siNodedotjs],
+    ["Python", siPython],
+    ["Java", "/icons/tools/java.svg"],
     ["C", siC],
     ["C++", siCplusplus],
-    ["Quartus Prime", siIntel],
-    ["Raspberry Pi", siRaspberrypi],
-    ["Python", siPython],
-    ["Docker", siDocker],
+    ["Arduino", siArduino],
     ["ESP32", siEspressif],
+    ["Raspberry Pi", siRaspberrypi],
+    ["ROS", siRos],
+    ["TIA Portal", siSiemens],
+    ["Factory I/O", "/icons/tools/factoryio.png"],
+    ["FreeRTOS", "/icons/tools/freertos.svg"],
+    ["Quartus Prime", siIntel],
+    ["Proteus", siProteus],
+    ["MATLAB", "/icons/tools/matlab.svg"],
+    ["Docker", siDocker],
     ["Linux", siLinux],
+    ["Ubuntu", siUbuntu],
+    ["Nginx", siNginx],
+    ["MQTT", siMqtt],
+    ["Home Assistant", siHomeassistant],
+    ["MagicMirror", "/icons/tools/magicmirror.svg"],
+    ["Flutter", siFlutter],
+    ["SolidWorks", "/icons/tools/solidworks.svg"],
+    ["PostgreSQL", siPostgresql],
+    ["Supabase", siSupabase],
+    ["Git", siGit],
     ["GitHub", siGithub],
+    ["Vercel", siVercel],
+    ["Figma", siFigma],
+    ["Postman", siPostman],
   ] as const;
   const loop = [...techs, ...techs];
 
@@ -307,9 +304,13 @@ function TechMarquee() {
         >
           {loop.map(([name, icon], index) => (
             <div key={name + index} className="mx-5 flex items-center gap-2.5 sm:mx-7">
-              <svg viewBox="0 0 24 24" className="size-4 shrink-0" style={{ color: "#" + icon.hex }} aria-hidden="true">
-                <path d={icon.path} fill="currentColor" />
-              </svg>
+              {typeof icon === "string" ? (
+                <img src={icon} alt="" className="size-4 shrink-0 object-contain" aria-hidden="true" />
+              ) : (
+                <svg viewBox="0 0 24 24" className="size-4 shrink-0" style={{ color: "#" + icon.hex }} aria-hidden="true">
+                  <path d={icon.path} fill="currentColor" />
+                </svg>
+              )}
               <span className="whitespace-nowrap font-mono text-[8px] uppercase tracking-[.16em] text-white/55">{name}</span>
             </div>
           ))}
@@ -328,8 +329,8 @@ function Hero() {
             <div className="absolute left-1/2 top-4 z-20 h-[75%] w-[min(94vw,570px)] -translate-x-1/2 sm:top-6 sm:h-[78%] md:top-10 md:h-[80%]">
               <div className="absolute bottom-0 left-1/2 h-[78%] w-[105%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(10,102,194,.18),transparent_66%)]" />
               <img
-                src="/images/julien-hero.png"
-                alt="Portrait temporaire"
+                src="/images/aladeadechi.png"
+                alt="Alade ADECHI"
                 className="absolute inset-0 h-full w-full object-contain object-top grayscale contrast-[1.06] brightness-[1.02]"
               />
             </div>
@@ -354,24 +355,6 @@ const projectItems = [
   },
   {
     n: "02",
-    title: "Legal AI",
-    type: "Concept / IA",
-    category: "IA",
-    image: "/images/reference-projects/course-platform.svg",
-    copy: "Assistant juridique orienté Bénin et OHADA avec recherche augmentée, contextualisation des sources et réponses spécialisées.",
-    tags: ["RAG", "LLM", "OHADA"],
-  },
-  {
-    n: "03",
-    title: "VoIP Systems",
-    type: "Réel / Réseau",
-    category: "IT",
-    image: "/images/reference-projects/local-marketplace.svg",
-    copy: "Architecture de communication IP : SIP, PBX, réseau et intégration de solutions pensées pour les besoins métier.",
-    tags: ["SIP", "PBX", "IT"],
-  },
-  {
-    n: "04",
     title: "Gestion d'eau en temps réel",
     type: "Réel / IoT",
     category: "Électronique",
@@ -380,7 +363,7 @@ const projectItems = [
     tags: ["Ultrason", "Capteurs", "Temps réel"],
   },
   {
-    n: "05",
+    n: "03",
     title: "Éclairage automatique",
     type: "Réel / Système",
     category: "Électronique",
@@ -389,7 +372,7 @@ const projectItems = [
     tags: ["PIR", "Arduino", "Automatisation"],
   },
   {
-    n: "06",
+    n: "04",
     title: "TRC25 · Robotique",
     type: "Réel / Robotique",
     category: "Électronique",
@@ -413,7 +396,7 @@ function ProjectVisual({ project }: { project: (typeof projectItems)[number] }) 
 
 function Projects() {
   const [filter, setFilter] = useState("Tous");
-  const filters = ["Tous", "IA", "Logiciel", "IT", "Électronique"];
+  const filters = ["Tous", "Logiciel", "Électronique"];
   const filteredProjects = projectItems.filter((project) => filter === "Tous" || project.category === filter);
 
   return (
@@ -453,9 +436,6 @@ function Projects() {
               <div className="block">
                 <div className="relative aspect-[16/9] overflow-hidden bg-[#151515]">
                   <ProjectVisual project={project} />
-                  <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-[#08090a]/70 px-3 py-1 font-mono text-[7px] font-medium uppercase tracking-[.14em] text-white/70 backdrop-blur-md">
-                    {project.type.startsWith("Réel") ? "Projet réel" : "Exploration"}
-                  </span>
                 </div>
 
                 <div className="px-4 pb-5 pt-4 sm:px-5 sm:pb-6">
@@ -522,7 +502,7 @@ function Path() {
       items: [
         ["2026 · après la licence", "Freelance", "Développement logiciel · conception et réalisation de solutions numériques", Code2],
         ["2026", "Certifications", "Gestion de projet · Google · IA · formations à venir en cloud computing (AWS, Azure, Google) · GitHub · ressources humaines", BadgeCheck],
-        ["Mars · mai 2026", "Port Autonome de Cotonou · DREF", "Stage de 3 mois · maintenance électrique et électronique · département des remorqueurs et engins flottants", Wrench],
+        ["Mars · mai 2026", "Port Autonome", "Stage de 3 mois · maintenance électrique et électronique · département des remorqueurs et engins flottants", Wrench],
       ],
     },
   ];
@@ -531,6 +511,7 @@ function Path() {
   const current = categories[activeCategory];
   const pathRef = useRef<HTMLElement>(null);
   const autoStoppedRef = useRef(false);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoStartRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoStepRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -563,6 +544,24 @@ function Path() {
       clearInterval(autoStepRef.current);
       autoStepRef.current = null;
     }
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => {
+      autoStoppedRef.current = false;
+      if (activeCategory < categories.length - 1) {
+        setActiveCategory((value) => Math.min(value + 1, categories.length - 1));
+        autoStepRef.current = setInterval(() => {
+          setActiveCategory((value) => {
+            if (value >= categories.length - 1) {
+              if (autoStepRef.current) clearInterval(autoStepRef.current);
+              autoStepRef.current = null;
+              return value;
+            }
+            return value + 1;
+          });
+        }, 6000);
+      }
+      resumeTimerRef.current = null;
+    }, 7000);
   };
 
   useEffect(() => {
@@ -599,6 +598,7 @@ function Path() {
       observer.disconnect();
       if (autoStartRef.current) clearTimeout(autoStartRef.current);
       if (autoStepRef.current) clearInterval(autoStepRef.current);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
     };
   }, []);
 
@@ -787,63 +787,6 @@ function Path() {
           </div>
         </div>
 
-        <div className="mt-24 border-t border-white/10 pt-16 sm:mt-28 sm:pt-20">
-          <div className="text-center">
-            <h3 className="text-[clamp(2.4rem,6.5vw,5rem)] font-light leading-none tracking-[-.06em]">
-              / FEUILLE DE ROUTE
-            </h3>
-            <p className="mx-auto mt-6 max-w-2xl text-[11px] leading-5 text-white/35 sm:text-[12px]">
-              Une trajectoire construite autour de trois axes : approfondir mes compétences, poursuivre une formation internationale et transformer mes acquis en systèmes utiles.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              [
-                "2026",
-                "Consolider les fondamentaux",
-                "Licence en Informatique Industrielle et Maintenance, projet de fin d’études sur le miroir intelligent connecté et expérience terrain au Port Autonome de Cotonou.",
-                "ÉTAPE ACTUELLE",
-              ],
-              [
-                "2026 · 2027",
-                "Monter en compétences",
-                "Renforcer l’anglais professionnel et poursuivre les certifications et apprentissages autour du cloud, de l’IA, du développement et des outils professionnels.",
-                "EN COURS",
-              ],
-              [
-                "2027 · 2028",
-                "Master international",
-                "Intégrer un Master orienté ingénierie, systèmes embarqués, IoT, informatique industrielle ou technologies numériques afin d’approfondir mon profil technique.",
-                "PROCHAINE ÉTAPE",
-              ],
-              [
-                "Long terme",
-                "Construire des systèmes à impact",
-                "Relier logiciel, IT, électronique, IoT et IA pour concevoir des solutions concrètes, expérimentales et déployables au Bénin comme à l’international.",
-                "VISION",
-              ],
-            ].map(([period, title, copy, status], index) => (
-              <article key={title} className="group bg-[#0b0d0f] p-6 transition-colors duration-300 hover:bg-[#101316] sm:p-7 lg:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/35">{period}</span>
-                  <span className={index < 2 ? "rounded-full bg-[#0A66C2]/15 px-2 py-1 font-mono text-[6px] font-semibold uppercase tracking-[.13em] text-[#5ea8f2]" : "rounded-full border border-white/10 px-2 py-1 font-mono text-[6px] font-semibold uppercase tracking-[.13em] text-white/35"}>
-                    {status}
-                  </span>
-                </div>
-                <h4 className="mt-10 text-[clamp(1.25rem,1.8vw,1.7rem)] font-light leading-tight tracking-[-.04em]">
-                  {title}
-                </h4>
-                <p className="mt-4 text-[10px] leading-5 text-white/40 sm:text-[11px]">
-                  {copy}
-                </p>
-                <span className="mt-8 block font-mono text-[7px] uppercase tracking-[.2em] text-white/20">
-                  0{index + 1}
-                </span>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -857,10 +800,9 @@ const confettiPieces = [
 
 function Services() {
   const services = [
-    ["01", "Développement logiciel", "Applications web, interfaces métier et outils numériques conçus pour être maintenables et utiles.", Code2, ["Web", "TypeScript", "Next.js"]],
-    ["02", "IoT & systèmes embarqués", "Intégration de capteurs, actionneurs et systèmes connectés du matériel au logiciel.", Cpu, ["ESP32", "Arduino", "Raspberry Pi"]],
+    ["01", "Développement logiciel", "Applications web, interfaces métier et outils numériques conçus pour être maintenables et utiles.", Code2, ["Web", "Mobile", "Desktop"]],
+    ["02", "IoT & systèmes embarqués", "Intégration de capteurs, actionneurs et systèmes connectés du matériel au logiciel.", Cpu, ["ESP32", "Automate", "Raspberry Pi"]],
     ["03", "IA & automatisation", "RAG, assistants spécialisés et automatisation de workflows autour de données métier.", Sparkles, ["RAG", "LLM", "Automation"]],
-    ["04", "VoIP & réseaux", "Architecture et intégration de solutions SIP, PBX, réseau et communication d'entreprise.", BriefcaseBusiness, ["SIP", "PBX", "Network"]],
   ] as const;
 
   return (
@@ -871,28 +813,28 @@ function Services() {
             / SERVICES
           </h2>
         </div>
-        <div className="mt-14 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,5.8rem)] font-light leading-[.86] tracking-[-.07em]">
-            Transformer une idée<br /><span className="text-white/30">en solution exploitable.</span>
-          </h2>
-          <p className="max-w-xs text-[11px] leading-5 text-white/35">Une approche qui relie conception, intégration et réalité terrain.</p>
-        </div>
 
-        <div className="mt-14 border-t border-white/10">
+        <div className="mt-14 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
           {services.map(([n, title, copy, Icon, tags]) => (
-            <article key={n} className="group grid gap-6 border-b border-white/10 py-7 transition-colors duration-300 hover:bg-white/[.02] sm:py-8 lg:grid-cols-[70px_1fr_1.25fr_220px_auto] lg:items-center">
-              <span className="font-mono text-[9px] tracking-[.18em] text-white/25">{n}</span>
-              <div className="flex items-center gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/45 transition-colors group-hover:border-white/35 group-hover:text-white">
-                  <Icon className="size-4" strokeWidth={1.4} />
+            <article key={n} className="group flex min-h-[300px] flex-col overflow-hidden bg-[#0a0b0c] p-6 transition-colors duration-500 hover:bg-[#101214] sm:p-8 lg:min-h-[340px] lg:p-10">
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-[9px] tracking-[.18em] text-white/25">{n}</span>
+                <span className="flex size-10 items-center justify-center border border-white/10 text-white/45 transition-all duration-500 group-hover:border-white/40 group-hover:bg-white group-hover:text-black">
+                  <Icon className="size-4" strokeWidth={1.35} />
                 </span>
-                <h3 className="text-[clamp(1.25rem,2.2vw,2rem)] font-light tracking-[-.045em]">{title}</h3>
               </div>
-              <p className="max-w-xl text-[11px] leading-5 text-white/38">{copy}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {tags.map((tag) => <span key={tag} className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[7px] uppercase tracking-[.13em] text-white/35">{tag}</span>)}
+
+              <div className="mt-16 max-w-[460px] sm:mt-20">
+                <h3 className="text-[clamp(1.45rem,2.5vw,2.35rem)] font-light leading-[.98] tracking-[-.055em]">{title}</h3>
+                <p className="mt-5 max-w-md text-[11px] leading-5 text-white/40">{copy}</p>
               </div>
-              <ArrowUpRight className="hidden size-4 text-white/25 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white lg:block" />
+
+              <div className="mt-auto flex items-end justify-between gap-4 pt-10">
+                <div className="flex min-w-0 flex-wrap gap-1.5">
+                  {tags.map((tag) => <span key={tag} className="border border-white/10 px-2.5 py-1 font-mono text-[7px] uppercase tracking-[.13em] text-white/30 transition-colors group-hover:border-white/20 group-hover:text-white/50">{tag}</span>)}
+                </div>
+                <ArrowUpRight className="size-4 shrink-0 text-white/20 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
+              </div>
             </article>
           ))}
         </div>
@@ -901,9 +843,11 @@ function Services() {
   );
 }
 
+
 function Contact() {
   const [confetti, setConfetti] = useState(false);
   const footerLinks = [
+    ["Profil", "#top"],
     ["Projets", "#projects"],
     ["Parcours", "#path"],
     ["Services", "#services"],
@@ -918,7 +862,7 @@ function Contact() {
           </h2>
         </div>
 
-        <Globe className="!inset-auto !right-[2%] !top-1/2 !h-[430px] !w-[430px] !-translate-y-1/2 opacity-55 sm:!right-[1%] sm:!h-[500px] sm:!w-[500px] xl:!right-[2%] xl:!h-[570px] xl:!w-[570px]" />
+        <Globe className="!inset-auto !right-[2%] !top-1/2 !h-[430px] !w-[430px] !-translate-y-1/2 max-md:!left-1/2 max-md:!right-auto max-md:!-translate-x-1/2 opacity-55 sm:!right-[1%] sm:!h-[500px] sm:!w-[500px] xl:!right-[2%] xl:!h-[570px] xl:!w-[570px]" />
 
         <div className="relative z-10 mt-14 max-w-3xl">
           <div>
@@ -930,7 +874,7 @@ function Contact() {
               <span className="text-white/32">concrétiser ?</span>
             </h2>
             <p className="mt-9 max-w-lg text-[13px] leading-6 text-white/48">
-              Les projets n’ont pas de frontières. Je collabore avec des équipes et des entreprises, au Bénin comme ailleurs, pour donner vie à des solutions numériques et techniques pensées pour le réel.
+              Je travaille avec des équipes et des entreprises pour concevoir, développer et intégrer des solutions numériques et techniques adaptées à leurs besoins.
             </p>
           </div>
 
@@ -974,8 +918,8 @@ function Contact() {
       </div>
 
       <footer className="pt-10 sm:pt-12">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-[1.3fr_.75fr_.95fr_.95fr_.9fr] lg:gap-10">
-          <div className="col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-10 sm:gap-y-12 md:grid-cols-[1.3fr_.75fr_.95fr_.95fr_.9fr] md:gap-10">
+          <div className="col-span-2 md:col-span-1">
             <a href="#top" className="group inline-flex items-center gap-3" aria-label="Retour à l'accueil">
               <span className="portfolio-logo-mark flex size-9 items-center justify-center rounded-full text-black transition-transform duration-300 group-hover:scale-105">
                 <span className="text-[11px] font-semibold tracking-[-.08em]">AD</span>
@@ -995,24 +939,9 @@ function Contact() {
             </nav>
           </div>
 
-          <div className="scroll-mt-24">
-            <p className="mb-3 font-mono text-[8px] uppercase tracking-[.22em] text-white/35">Services</p>
-            <nav className="grid gap-2">
-              <a href="#projects" className="group w-fit text-[10px] text-white/60 transition-all duration-300 hover:translate-x-1 hover:text-white sm:text-[11px]">Développement web</a>
-              <a href="#projects" className="group w-fit text-[10px] text-white/60 transition-all duration-300 hover:translate-x-1 hover:text-white sm:text-[11px]">IoT & systèmes embarqués</a>
-              <a href="#projects" className="group w-fit text-[10px] text-white/60 transition-all duration-300 hover:translate-x-1 hover:text-white sm:text-[11px]">IA & automatisation</a>
-              
-            </nav>
-          </div>
 
-          <div>
-            <nav className="grid gap-2">
-              <span className="flex w-fit items-center gap-1.5 text-[10px] text-white/35 sm:text-[11px]" aria-label="Yisin.ai en cours"><span>Yisin.ai</span><span className="relative -top-1 rounded-full bg-[#0A66C2] px-1.5 py-0.5 font-mono text-[7px] font-semibold leading-none tracking-[.12em] text-white shadow-[0_4px_14px_rgba(10,102,194,.28)]">En cours</span></span>
-              <span className="flex w-fit items-center gap-1.5 text-[10px] text-white/35 sm:text-[11px]" aria-label="DNS Corporate en cours"><span>DNS Corporate</span><span className="relative -top-1 rounded-full bg-[#0A66C2] px-1.5 py-0.5 font-mono text-[7px] font-semibold leading-none tracking-[.12em] text-white shadow-[0_4px_14px_rgba(10,102,194,.28)]">En cours</span></span>
-              <a href="https://ucaotech.ucaobenin.org" target="_blank" rel="noreferrer" className="group flex w-fit items-center gap-2 text-[10px] text-white/60 transition-all duration-300 hover:translate-x-1 hover:text-white sm:text-[11px]"><span>UCAO-TECH</span><ArrowUpRight className="size-3 opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-70" /></a>
-              <span className="flex w-fit items-center gap-1.5 text-[10px] text-white/35 sm:text-[11px]" aria-label="NOKIVI bientôt"><span>NOKIVI</span><span className="relative -top-1 rounded-full bg-[#0A66C2] px-1.5 py-0.5 font-mono text-[7px] font-semibold leading-none tracking-[.12em] text-white shadow-[0_4px_14px_rgba(10,102,194,.28)]">Bientôt</span></span>
-            </nav>
-          </div>
+
+
 
           <div id="networks" className="scroll-mt-24">
             <p className="mb-3 font-mono text-[8px] uppercase tracking-[.22em] text-white/35">Réseaux</p>
@@ -1036,7 +965,7 @@ function Contact() {
 
         <div className="mt-10 grid gap-4 border-t border-white/10 pt-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/35 sm:mt-12 sm:grid-cols-3 sm:items-center">
           <span className="text-center normal-case sm:text-left">© 2026 Alade ADECHI. Tous droits réservés.</span>
-          <span className="text-center text-white/25">Conçu avec Next.js · TypeScript · Tailwind CSS</span>
+          <span className="text-center text-white/25">Conçu avec Next.js · TypeScript</span>
           <a href="#top" className="group inline-flex items-center justify-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-white/70 sm:justify-self-end">Retour en haut <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></a>
         </div>
 
