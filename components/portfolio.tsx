@@ -1006,7 +1006,6 @@ function Contact() {
           </div>
 
           <div>
-            <p className="mb-3 font-mono text-[8px] uppercase tracking-[.22em] text-white/35">Découvrir</p>
             <nav className="grid gap-2">
               <span className="flex w-fit items-center gap-1.5 text-[10px] text-white/35 sm:text-[11px]" aria-label="Yisin.ai en cours"><span>Yisin.ai</span><span className="relative -top-1 rounded-full bg-[#0A66C2] px-1.5 py-0.5 font-mono text-[7px] font-semibold leading-none tracking-[.12em] text-white shadow-[0_4px_14px_rgba(10,102,194,.28)]">En cours</span></span>
               <span className="flex w-fit items-center gap-1.5 text-[10px] text-white/35 sm:text-[11px]" aria-label="DNS Corporate en cours"><span>DNS Corporate</span><span className="relative -top-1 rounded-full bg-[#0A66C2] px-1.5 py-0.5 font-mono text-[7px] font-semibold leading-none tracking-[.12em] text-white shadow-[0_4px_14px_rgba(10,102,194,.28)]">En cours</span></span>
