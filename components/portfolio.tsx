@@ -262,58 +262,121 @@ function Projects() {
 }
 
 function Path() {
-  const milestones = [
-    ["01", "2026 · maintenant", "KOBLI IT", "Ingénieur VoIP · architecture, SIP, Yeastar, infrastructures"],
-    ["02", "2026", "UCAO-UUC", "Projet de fin d'études · miroir connecté intelligent"],
-    ["03", "2025", "Port Autonome de Cotonou", "Stage · maintenance électrique et électronique"],
+  const categories = [
+    {
+      code: "01",
+      label: "Parcours académique",
+      intro: "La formation et les projets qui ont construit mes bases techniques.",
+      items: [
+        ["2026", "UCAO-UUC", "Licence · Informatique Industrielle et Maintenance"],
+        ["2026", "Projet de fin d'études", "Miroir connecté intelligent · IoT · domotique"],
+      ],
+    },
+    {
+      code: "02",
+      label: "Activité extra-scolaire",
+      intro: "Les engagements et projets qui prolongent la formation par la technologie et l'innovation.",
+      items: [
+        ["2026", "UCAO-TECH", "Association scientifique · technologie · innovation"],
+        ["2026", "Robotique UCAO", "Participation à des projets autour de l'innovation"],
+      ],
+    },
+    {
+      code: "03",
+      label: "Expérience professionnelle",
+      intro: "Les expériences de terrain et les systèmes sur lesquels je travaille aujourd'hui.",
+      items: [
+        ["2026 · maintenant", "KOBLI IT", "Ingénieur VoIP · architecture, SIP, Yeastar, infrastructures"],
+        ["2025", "Port Autonome de Cotonou", "Stage · maintenance électrique et électronique"],
+      ],
+    },
   ];
+
+  const [activeCategory, setActiveCategory] = useState(0);
+  const current = categories[activeCategory];
 
   return (
     <section
       id="path"
-      className="border-b border-black/10 bg-[#f0eee9] px-5 py-28 text-[#111] dark:border-white/10 dark:bg-[#08090a] dark:text-white sm:px-8 lg:px-10 lg:py-36"
+      className="border-b border-white/10 bg-[#08090a] px-5 py-28 text-white sm:px-8 lg:px-10 lg:py-36"
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid gap-14 lg:grid-cols-[.32fr_1fr]">
-          <div>
-            <p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-black/42 dark:text-white/42">
-              <span className="h-px w-7 bg-black/25 dark:bg-white/25" />
+        <div className="grid gap-12 lg:grid-cols-[.32fr_1fr] lg:gap-14">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="font-mono text-[9px] uppercase tracking-[.24em] text-white/42">
               Parcours
             </p>
-            <p className="mt-8 max-w-[190px] text-[11px] leading-5 text-black/40 dark:text-white/38">
-              Quelques étapes qui ont façonné ma manière de concevoir, intégrer et faire évoluer des systèmes.
+
+            <p className="mt-7 max-w-[220px] text-[11px] leading-5 text-white/35">
+              Une trajectoire entre formation, engagement technologique et expérience de terrain.
             </p>
-          </div>
 
-          <div className="relative">
-            <div className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px bg-black/10 dark:bg-white/10 sm:left-[15px]" />
-
-            <div className="space-y-2">
-              {milestones.map(([index, date, title, copy]) => (
-                <article
-                  key={title}
-                  className="group relative grid grid-cols-[32px_1fr] gap-5 py-7 sm:grid-cols-[40px_1fr] sm:gap-7"
+            <div className="mt-10 border-t border-white/10">
+              {categories.map((category, index) => (
+                <button
+                  key={category.code}
+                  type="button"
+                  onClick={() => setActiveCategory(index)}
+                  className="group flex w-full items-center gap-4 border-b border-white/10 py-5 text-left"
+                  aria-pressed={index === activeCategory}
                 >
-                  <div className="relative z-10 flex size-[23px] items-center justify-center rounded-full border border-black/15 bg-[#f0eee9] font-mono text-[7px] tracking-[.08em] text-black/45 transition-all duration-500 group-hover:border-black/40 group-hover:bg-black group-hover:text-white dark:border-white/15 dark:bg-[#08090a] dark:text-white/45 dark:group-hover:border-white/50 dark:group-hover:bg-white dark:group-hover:text-black sm:size-[31px]">
-                    {index}
-                  </div>
-
-                  <div className="border-t border-black/10 pt-5 transition-transform duration-500 group-hover:translate-x-1 dark:border-white/10 sm:pt-6">
-                    <div className="flex flex-wrap items-baseline justify-between gap-4">
-                      <h3 className="text-[clamp(1.5rem,2.4vw,2.5rem)] font-light leading-none tracking-[-.05em]">
-                        {title}
-                      </h3>
-                      <span className="font-mono text-[8px] uppercase tracking-[.18em] text-black/35 dark:text-white/35">
-                        {date}
-                      </span>
-                    </div>
-                    <p className="mt-4 max-w-2xl text-[12px] leading-5 text-black/48 dark:text-white/48">
-                      {copy}
-                    </p>
-                  </div>
-                </article>
+                  <span className={index === activeCategory ? "font-mono text-[8px] tracking-[.18em] text-white" : "font-mono text-[8px] tracking-[.18em] text-white/25 transition-colors group-hover:text-white/60"}>
+                    {category.code}
+                  </span>
+                  <span className={index === activeCategory ? "text-[14px] font-normal text-white" : "text-[14px] font-light text-white/38 transition-colors group-hover:text-white/70"}>
+                    {category.label}
+                  </span>
+                </button>
               ))}
             </div>
+          </div>
+
+          <div className="relative min-h-[430px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.code}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="relative"
+              >
+                <p className="mb-8 max-w-xl text-[12px] leading-6 text-white/40">
+                  {current.intro}
+                </p>
+
+                <div className="relative">
+                  <div className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px bg-white/10 sm:left-[15px]" />
+
+                  <div>
+                    {current.items.map(([date, title, copy], index) => (
+                      <article
+                        key={date + "-" + title}
+                        className="group relative grid grid-cols-[32px_1fr] gap-5 py-7 sm:grid-cols-[40px_1fr] sm:gap-7"
+                      >
+                        <div className="relative z-10 flex size-[23px] items-center justify-center rounded-full border border-white/15 bg-[#08090a] font-mono text-[7px] tracking-[.08em] text-white/45 transition-all duration-500 group-hover:border-white/50 group-hover:bg-white group-hover:text-black sm:size-[31px]">
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
+
+                        <div className="border-t border-white/10 pt-5 transition-transform duration-500 group-hover:translate-x-1 sm:pt-6">
+                          <div className="flex flex-wrap items-baseline justify-between gap-4">
+                            <h3 className="text-[clamp(1.5rem,2.4vw,2.5rem)] font-light leading-none tracking-[-.05em]">
+                              {title}
+                            </h3>
+                            <span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/35">
+                              {date}
+                            </span>
+                          </div>
+                          <p className="mt-4 max-w-2xl text-[12px] leading-5 text-white/45">
+                            {copy}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -347,8 +410,8 @@ function Contact() {
               Construire · intégrer · faire évoluer
             </p>
             <h2 className="mt-6 max-w-2xl text-[clamp(2.2rem,4vw,4.6rem)] font-light leading-[.9] tracking-[-.065em]">
-              Prêt à donner<br />
-              <span className="text-white/32">forme à votre idée ?</span>
+              Un projet à<br />
+              <span className="text-white/32">concrétiser ?</span>
             </h2>
             <p className="mt-9 max-w-lg text-[13px] leading-6 text-white/48">
               Les projets n’ont pas de frontières. Je collabore avec des équipes et des entreprises, au Bénin comme ailleurs, pour donner vie à des solutions numériques et techniques pensées pour le réel.
@@ -382,11 +445,12 @@ function Contact() {
             </div>
 
             <a
-              href="mailto:aladeadechi100@gmail.com?subject=Demande%20de%20rendez-vous"
-              className="group inline-flex items-center gap-3 rounded-full border border-white/18 px-5 py-3 text-[10px] font-medium uppercase tracking-[.13em] text-white/72 transition-all duration-300 hover:border-white/40 hover:text-white"
+              href="#contact"
+              className="group inline-flex items-center gap-2 rounded-md border-l border-white/10 bg-white px-4 py-2.5 text-[9px] font-medium uppercase tracking-[.13em] text-black transition hover:bg-[#dfe3e8]"
             >
-              Réserver un créneau
-              <CalendarDays className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+              RDV
+              <CalendarDays className="size-3" />
+              <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
