@@ -786,6 +786,64 @@ function Path() {
           </div>
           </div>
         </div>
+
+        <div className="mt-24 border-t border-white/10 pt-16 sm:mt-28 sm:pt-20">
+          <div className="text-center">
+            <h3 className="text-[clamp(2.4rem,6.5vw,5rem)] font-light leading-none tracking-[-.06em]">
+              / FEUILLE DE ROUTE
+            </h3>
+            <p className="mx-auto mt-6 max-w-2xl text-[11px] leading-5 text-white/35 sm:text-[12px]">
+              Une trajectoire construite autour de trois axes : approfondir mes compétences, poursuivre une formation internationale et transformer mes acquis en systèmes utiles.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              [
+                "2026",
+                "Consolider les fondamentaux",
+                "Licence en Informatique Industrielle et Maintenance, projet de fin d’études sur le miroir intelligent connecté et expérience terrain au Port Autonome de Cotonou.",
+                "ÉTAPE ACTUELLE",
+              ],
+              [
+                "2026 · 2027",
+                "Monter en compétences",
+                "Renforcer l’anglais professionnel et poursuivre les certifications et apprentissages autour du cloud, de l’IA, du développement et des outils professionnels.",
+                "EN COURS",
+              ],
+              [
+                "2027 · 2028",
+                "Master international",
+                "Intégrer un Master orienté ingénierie, systèmes embarqués, IoT, informatique industrielle ou technologies numériques afin d’approfondir mon profil technique.",
+                "PROCHAINE ÉTAPE",
+              ],
+              [
+                "Long terme",
+                "Construire des systèmes à impact",
+                "Relier logiciel, IT, électronique, IoT et IA pour concevoir des solutions concrètes, expérimentales et déployables au Bénin comme à l’international.",
+                "VISION",
+              ],
+            ].map(([period, title, copy, status], index) => (
+              <article key={title} className="group bg-[#0b0d0f] p-6 transition-colors duration-300 hover:bg-[#101316] sm:p-7 lg:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/35">{period}</span>
+                  <span className={index < 2 ? "rounded-full bg-[#0A66C2]/15 px-2 py-1 font-mono text-[6px] font-semibold uppercase tracking-[.13em] text-[#5ea8f2]" : "rounded-full border border-white/10 px-2 py-1 font-mono text-[6px] font-semibold uppercase tracking-[.13em] text-white/35"}>
+                    {status}
+                  </span>
+                </div>
+                <h4 className="mt-10 text-[clamp(1.25rem,1.8vw,1.7rem)] font-light leading-tight tracking-[-.04em]">
+                  {title}
+                </h4>
+                <p className="mt-4 text-[10px] leading-5 text-white/40 sm:text-[11px]">
+                  {copy}
+                </p>
+                <span className="mt-8 block font-mono text-[7px] uppercase tracking-[.2em] text-white/20">
+                  0{index + 1}
+                </span>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
