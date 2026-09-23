@@ -24,11 +24,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className={`${instrumentSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="fr" suppressHydrationWarning className={`${instrumentSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(() => { try { const saved = localStorage.getItem("portfolio-theme"); const theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; document.documentElement.style.colorScheme = theme; } catch {} })();`,
+            __html: `(() => { try { const saved = localStorage.getItem("portfolio-theme"); const theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; document.documentElement.style.colorScheme = theme; document.documentElement.classList.toggle("dark", theme === "dark"); } catch {} })();`,
           }}
         />
       </head>
