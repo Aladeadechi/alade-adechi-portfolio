@@ -65,8 +65,8 @@ function Nav() {
   }, []);
 
   const items = language === "fr"
-    ? [["01", "À propos", "about"], ["02", "Projets", "projects"], ["03", "Parcours", "path"], ["04", "Services", "services"], ["05", "Réseaux", "networks"]]
-    : [["01", "About", "about"], ["02", "Projects", "projects"], ["03", "Experience", "path"], ["04", "Services", "services"], ["05", "Networks", "networks"]];
+    ? [["01", "Projets", "projects"], ["02", "Parcours", "path"], ["03", "Services", "services"], ["04", "Réseaux", "networks"]]
+    : [["01", "Projects", "projects"], ["02", "Experience", "path"], ["03", "Services", "services"], ["04", "Networks", "networks"]];
 
   const toggleLanguage = () => setLanguage((current) => current === "fr" ? "en" : "fr");
 
@@ -253,9 +253,6 @@ function Hero() {
     </motion.div>
   </section>;
 }
-function About() {
-  return <section id="about" className="relative border-b border-white/10 bg-[#f0eee9] px-5 py-28 text-[#111] sm:px-8 lg:px-10 lg:py-40"><div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-[.32fr_1fr]"><p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-black/42"><span className="h-px w-7 bg-black/25" />À propos</p><div><h2 className="max-w-5xl text-[clamp(2.4rem,5vw,6rem)] font-light leading-[.9] tracking-[-.06em]">Je travaille à l'endroit où <span className="font-medium text-[#222]">le logiciel</span> rencontre <span className="text-black/35">le réel.</span></h2><div className="mt-16 grid max-w-4xl gap-10 border-t border-black/15 pt-7 text-[13px] leading-6 text-black/55 md:grid-cols-2"><p>Formation en Informatique Industrielle et Maintenance, puis une pratique qui traverse développement, automatisation, électronique, IA et infrastructures.</p><p>Je construis des systèmes complets : comprendre le problème, concevoir l'architecture, prototyper, intégrer et rendre l'ensemble fiable.</p></div></div></div></section>;
-}
 function Projects() {
   const ref=useRef<HTMLElement>(null); const {scrollYProgress}=useScroll({target:ref,offset:["start start","end end"]}); const x=useTransform(scrollYProgress,[0,1],["0%","-66%"]); const progress=useSpring(scrollYProgress,{stiffness:80,damping:20});
   return <section id="projects" ref={ref} className="theme-dark-surface relative h-[320vh] bg-[#08090a] text-white"><div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden"><div className="mx-auto mb-8 w-full max-w-[1500px] px-5 sm:px-8 lg:px-10"><p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.24em] text-white/38"><span className="h-px w-7 bg-white/50" />Selected work</p><h2 className="mt-3 text-[clamp(2.2rem,4.8vw,5.6rem)] font-light leading-none tracking-[-.06em]">Des systèmes en mouvement.</h2></div><motion.div style={{x}} className="flex gap-6 pl-5 sm:pl-8 lg:pl-[max(40px,calc((100vw-1500px)/2))]">{projects.map((p)=><article key={p.n} className={`group relative h-[61vh] min-h-[450px] shrink-0 overflow-hidden border border-white/15 bg-[#101214] ${p.n === "01" ? "w-[min(64vw,880px)]" : p.n === "02" ? "w-[min(74vw,980px)]" : "w-[min(60vw,820px)]"}`}><div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_35%,rgba(180,180,180,.10),transparent_28%),linear-gradient(135deg,#111517,#08090a)]"/><div className="absolute inset-0 opacity-30 transition-transform duration-[1600ms] group-hover:scale-110"><div className="absolute left-[18%] top-[20%] h-[48%] w-[64%] border border-white/20"/><div className="absolute left-[28%] top-[32%] h-[32%] w-[44%] border border-white/10"/><motion.div className="absolute top-0 h-full w-px bg-white/40" animate={{x:["10%","900%"]}} transition={{duration:4,repeat:Infinity,ease:"linear"}}/></div><div className="absolute inset-x-7 top-7 flex justify-between font-mono text-[8px] uppercase tracking-[.2em] text-white/35 md:inset-x-10 md:top-10"><span>{p.n} / 03</span><span>{p.type}</span></div><div className="absolute bottom-7 left-7 right-7 md:bottom-10 md:left-10 md:right-10"><div className="mb-4 h-px w-10 bg-white/50 transition-all duration-700 group-hover:w-28"/><h3 className="text-[clamp(2.7rem,5vw,5.8rem)] font-light leading-[.85] tracking-[-.07em]">{p.title}</h3><p className="mt-5 max-w-xl text-[12px] leading-5 text-white/45">{p.copy}</p><div className="mt-6 flex items-center justify-between border-t border-white/12 pt-4"><span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/35">{p.mark} / SYSTEM</span><ArrowUpRight className="size-4 text-white/60 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"/></div></div></article>)}</motion.div><div className="mx-auto mt-7 w-full max-w-[1500px] px-5 sm:px-8 lg:px-10"><div className="h-px bg-white/10"><motion.div style={{scaleX:progress}} className="h-full origin-left bg-white/50"/></div></div></div></section>;
@@ -307,27 +304,57 @@ function Path() {
               Parcours
             </p>
 
-            <p className="mt-7 max-w-[220px] text-[11px] leading-5 text-white/35">
-              Une trajectoire entre formation, engagement technologique et expérience de terrain.
-            </p>
+            <div className="mt-10 space-y-1">
+              {categories.map((category, index) => {
+                const active = index === activeCategory;
 
-            <div className="mt-10 border-t border-white/10">
-              {categories.map((category, index) => (
-                <button
-                  key={category.code}
-                  type="button"
-                  onClick={() => setActiveCategory(index)}
-                  className="group flex w-full items-center gap-4 border-b border-white/10 py-5 text-left"
-                  aria-pressed={index === activeCategory}
-                >
-                  <span className={index === activeCategory ? "font-mono text-[8px] tracking-[.18em] text-white" : "font-mono text-[8px] tracking-[.18em] text-white/25 transition-colors group-hover:text-white/60"}>
-                    {category.code}
-                  </span>
-                  <span className={index === activeCategory ? "text-[14px] font-normal text-white" : "text-[14px] font-light text-white/38 transition-colors group-hover:text-white/70"}>
-                    {category.label}
-                  </span>
-                </button>
-              ))}
+                return (
+                  <div key={category.code} className="py-1">
+                    <button
+                      type="button"
+                      onClick={() => setActiveCategory(index)}
+                      className="group flex w-full items-baseline gap-3 text-left"
+                      aria-pressed={active}
+                    >
+                      <span
+                        className={active
+                          ? "font-mono text-[9px] tracking-[.18em] text-white/75"
+                          : "font-mono text-[9px] tracking-[.18em] text-white/22 transition-colors group-hover:text-white/50"}
+                      >
+                        [{category.code}]
+                      </span>
+                      <span
+                        className={active
+                          ? "text-[14px] font-normal tracking-[-.02em] text-white"
+                          : "text-[13px] font-light tracking-[-.015em] text-white/30 transition-colors group-hover:text-white/60"}
+                      >
+                        {category.label}
+                      </span>
+                    </button>
+
+                    <AnimatePresence initial={false} mode="wait">
+                      {active && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, y: -4 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -4 }}
+                          transition={{ duration: 0.28, ease: "easeOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="ml-8 mt-4 max-w-[290px] pb-4">
+                            <p className="text-[11px] leading-5 text-white/42">
+                              {category.intro}
+                            </p>
+                            <span className="mt-4 block font-mono text-[8px] uppercase tracking-[.18em] text-white/20">
+                              Dossier actif
+                            </span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -341,10 +368,6 @@ function Path() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="relative"
               >
-                <p className="mb-8 max-w-xl text-[12px] leading-6 text-white/40">
-                  {current.intro}
-                </p>
-
                 <div className="relative">
                   <div className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px bg-white/10 sm:left-[15px]" />
 
@@ -354,9 +377,7 @@ function Path() {
                         key={date + "-" + title}
                         className="group relative grid grid-cols-[32px_1fr] gap-5 py-7 sm:grid-cols-[40px_1fr] sm:gap-7"
                       >
-                        <div className="relative z-10 flex size-[23px] items-center justify-center rounded-full border border-white/15 bg-[#08090a] font-mono text-[7px] tracking-[.08em] text-white/45 transition-all duration-500 group-hover:border-white/50 group-hover:bg-white group-hover:text-black sm:size-[31px]">
-                          {String(index + 1).padStart(2, "0")}
-                        </div>
+                        <div className="relative z-10 size-[23px] rounded-full border border-white/15 bg-[#08090a] transition-all duration-500 group-hover:border-white/50 group-hover:bg-white sm:size-[31px]" />
 
                         <div className="border-t border-white/10 pt-5 transition-transform duration-500 group-hover:translate-x-1 sm:pt-6">
                           <div className="flex flex-wrap items-baseline justify-between gap-4">
@@ -393,7 +414,6 @@ const confettiPieces = [
 function Contact() {
   const [confetti, setConfetti] = useState(false);
   const footerLinks = [
-    ["À propos", "#about"],
     ["Projets", "#projects"],
     ["Parcours", "#path"],
     ["Services", "#services"],
@@ -405,7 +425,8 @@ function Contact() {
         <Globe className="!inset-auto !right-[2%] !top-1/2 !h-[430px] !w-[430px] !-translate-y-1/2 opacity-55 sm:!right-[1%] sm:!h-[500px] sm:!w-[500px] xl:!right-[2%] xl:!h-[570px] xl:!w-[570px]" />
 
         <div className="relative z-10 max-w-3xl">
-          <div className="mt-16">
+          <p className="font-mono text-[14px] uppercase tracking-[.20em] text-white/55">/ Contact</p>
+          <div className="mt-10">
             <p className="max-w-xl text-[10px] uppercase tracking-[.16em] text-white/28">
               Construire · intégrer · faire évoluer
             </p>
@@ -536,5 +557,5 @@ function Contact() {
 }
 
 export function Portfolio() {
-  return <div className={`portfolio-shell bg-[#08090a] text-white ${/* Nav controls are persisted; page theme follows the html color scheme. */ ""}`}><Nav/><main><Hero/><About/><Projects/><Path/><Contact/></main></div>;
+  return <div className={`portfolio-shell bg-[#08090a] text-white ${/* Nav controls are persisted; page theme follows the html color scheme. */ ""}`}><Nav/><main><Hero/><Projects/><Path/><Contact/></main></div>;
 }
