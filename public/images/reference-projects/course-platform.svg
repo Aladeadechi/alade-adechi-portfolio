@@ -1,0 +1,44 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800' width='1200' height='800'>
+<defs>
+<radialGradient id='g' cx='50%' cy='110%' r='70%'><stop offset='0' stop-color='#999' stop-opacity='.55'/><stop offset='1' stop-color='#999' stop-opacity='0'/></radialGradient>
+<linearGradient id='fade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#fff' stop-opacity='.08'/><stop offset='1' stop-color='#fff' stop-opacity='0'/></linearGradient>
+<pattern id='dots' width='24' height='24' patternUnits='userSpaceOnUse'><circle cx='2' cy='2' r='1.2' fill='#fff' fill-opacity='.06'/></pattern>
+</defs>
+<rect width='1200' height='800' fill='#f2f2f2'/>
+<rect width='1200' height='800' fill='url(#dots)'/>
+<rect width='1200' height='800' fill='url(#g)'/>
+<g transform='translate(100 90)'>
+<rect width='1000' height='620' rx='18' fill='#fafafa' stroke='#e5e5e5'/>
+<rect width='1000' height='44' rx='18' fill='#f0f0f0'/>
+<rect y='26' width='1000' height='18' fill='#f0f0f0'/>
+<circle cx='24' cy='22' r='6' fill='#ff5f57'/><circle cx='44' cy='22' r='6' fill='#febc2e'/><circle cx='64' cy='22' r='6' fill='#28c840'/>
+<rect x='380' y='12' width='240' height='20' rx='10' fill='#e4e4e4'/>
+<g transform='translate(0 44)'>
+<rect width='1000' height='576' fill='#fff'/>
+<rect x='0' y='0' width='640' height='360' fill='#111'/>
+<circle cx='320' cy='180' r='44' fill='#fff' fill-opacity='.95'/><polygon points='308,158 308,202 344,180' fill='#111'/>
+<rect x='30' y='320' width='580' height='6' rx='3' fill='#333'/><rect x='30' y='320' width='230' height='6' rx='3' fill='#D9653B'/>
+<text x='30' y='410' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='26' font-weight='800' fill='#111' >Laravel + Next.js : l'API parfaite</text>
+<text x='30' y='446' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='16' font-weight='600' fill='#777' >Module 3 · Leçon 7 — Authentification &amp; Sanctum</text>
+<g transform='translate(670 20)'>
+<rect y='0' width='300' height='52' rx='12' fill='#f4f4f4'/>
+<circle cx='26' cy='26' r='9' fill='#D9653B'/>
+<text x='48' y='32' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#333' >Introduction</text>
+<rect y='64' width='300' height='52' rx='12' fill='#f4f4f4'/>
+<circle cx='26' cy='90' r='9' fill='#D9653B'/>
+<text x='48' y='96' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#333' >Modèles &amp; migrations</text>
+<rect y='128' width='300' height='52' rx='12' fill='#f4f4f4'/>
+<circle cx='26' cy='154' r='9' fill='#D9653B'/>
+<text x='48' y='160' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#333' >API Resources</text>
+<rect y='192' width='300' height='52' rx='12' fill='#111'/>
+<circle cx='26' cy='218' r='9' fill='#fff'/>
+<text x='48' y='224' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#fff' >Authentification</text>
+<rect y='256' width='300' height='52' rx='12' fill='#f4f4f4'/>
+<circle cx='26' cy='282' r='9' fill='#ccc'/>
+<text x='48' y='288' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#333' >Tests Pest</text>
+<rect y='320' width='300' height='52' rx='12' fill='#f4f4f4'/>
+<circle cx='26' cy='346' r='9' fill='#ccc'/>
+<text x='48' y='352' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='15' font-weight='700' fill='#333' >Déploiement</text></g>
+</g>
+</g>
+</svg>

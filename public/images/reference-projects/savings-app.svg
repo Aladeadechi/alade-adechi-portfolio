@@ -1,0 +1,35 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800' width='1200' height='800'>
+<defs>
+<radialGradient id='g' cx='50%' cy='110%' r='70%'><stop offset='0' stop-color='#D9653B' stop-opacity='.55'/><stop offset='1' stop-color='#D9653B' stop-opacity='0'/></radialGradient>
+<linearGradient id='fade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#fff' stop-opacity='.08'/><stop offset='1' stop-color='#fff' stop-opacity='0'/></linearGradient>
+<pattern id='dots' width='24' height='24' patternUnits='userSpaceOnUse'><circle cx='2' cy='2' r='1.2' fill='#fff' fill-opacity='.06'/></pattern>
+</defs>
+<rect width='1200' height='800' fill='#101010'/>
+<rect width='1200' height='800' fill='url(#dots)'/>
+<rect width='1200' height='800' fill='url(#g)'/>
+<g transform='translate(170 170) rotate(-8)'>
+<rect width='230' height='470' rx='38' fill='#0b0b0b' stroke='#333' stroke-width='3'/>
+<rect x='10' y='10' width='210' height='450' rx='30' fill='#171717'/>
+<rect x='80' y='20' width='70' height='18' rx='9' fill='#0b0b0b'/>
+<g transform='translate(10 50)'><text x='18' y='30' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='18' font-weight='800' fill='#fff' >Tontine+</text>
+<rect x='14' y='50' width='182' height='130' rx='20' fill='#D9653B'/><text x='30' y='90' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='13' font-weight='600' fill='#fff' fill-opacity='.8'>Épargne totale</text><text x='30' y='140' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='32' font-weight='800' fill='#fff' >845 000</text>
+<rect x='14' y='200' width='182' height='42' rx='12' fill='#222'/><rect x='14' y='252' width='182' height='42' rx='12' fill='#222'/><rect x='14' y='304' width='182' height='42' rx='12' fill='#222'/><rect x='14' y='356' width='182' height='42' rx='12' fill='#222'/></g>
+</g>
+<g transform='translate(485 130) rotate(0)'>
+<rect width='230' height='470' rx='38' fill='#0b0b0b' stroke='#333' stroke-width='3'/>
+<rect x='10' y='10' width='210' height='450' rx='30' fill='#171717'/>
+<rect x='80' y='20' width='70' height='18' rx='9' fill='#0b0b0b'/>
+<g transform='translate(10 50)'><text x='18' y='30' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='18' font-weight='800' fill='#fff' >Mon groupe</text>
+<circle cx='40' cy='80' r='20' fill='#555' stroke='#171717' stroke-width='4'/><circle cx='74' cy='80' r='20' fill='#777' stroke='#171717' stroke-width='4'/><circle cx='108' cy='80' r='20' fill='#D9653B' stroke='#171717' stroke-width='4'/><circle cx='142' cy='80' r='20' fill='#999' stroke='#171717' stroke-width='4'/><circle cx='176' cy='80' r='20' fill='#444' stroke='#171717' stroke-width='4'/>
+<polyline points='10.0,239.1 24.6,246.4 39.2,226.5 53.8,189.4 68.5,155.4 83.1,143.2 97.7,157.9 112.3,188.6 126.9,214.6 141.5,217.9 156.2,194.5 170.8,156.5 185.4,124.8 200.0,116.5' fill='none' stroke='#D9653B' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/>
+<polygon points='10,280 10.0,239.1 24.6,246.4 39.2,226.5 53.8,189.4 68.5,155.4 83.1,143.2 97.7,157.9 112.3,188.6 126.9,214.6 141.5,217.9 156.2,194.5 170.8,156.5 185.4,124.8 200.0,116.5 200,280' fill='#D9653B' fill-opacity='.12'/><rect x='14' y='320' width='182' height='50' rx='25' fill='#fff'/><text x='52' y='352' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='17' font-weight='800' fill='#111' >Cotiser</text></g>
+</g>
+<g transform='translate(800 170) rotate(8)'>
+<rect width='230' height='470' rx='38' fill='#0b0b0b' stroke='#333' stroke-width='3'/>
+<rect x='10' y='10' width='210' height='450' rx='30' fill='#171717'/>
+<rect x='80' y='20' width='70' height='18' rx='9' fill='#0b0b0b'/>
+<g transform='translate(10 50)'><text x='18' y='30' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='18' font-weight='800' fill='#fff' >Paiement</text>
+<circle cx='105' cy='140' r='60' fill='none' stroke='#D9653B' stroke-width='8'/><text x='80' y='152' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='44' font-weight='800' fill='#D9653B' >✓</text>
+<text x='34' y='250' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='16' font-weight='700' fill='#ddd' >Envoyé avec succès</text><text x='62' y='290' font-family='Manrope, Inter, Helvetica, Arial, sans-serif' font-size='18' font-weight='800' fill='#fff' >25 000 FCFA</text></g>
+</g>
+</svg>
