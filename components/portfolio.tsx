@@ -331,7 +331,7 @@ function Hero() {
               <img
                 src="/images/aladeadechi.png"
                 alt="Alade ADECHI"
-                className="absolute inset-0 h-full w-full object-contain object-top grayscale contrast-[1.06] brightness-[1.02]"
+                className="absolute inset-0 h-full w-full object-contain object-top grayscale contrast-[1.06] brightness-[1.02] transition-[filter] duration-500 ease-out hover:grayscale-0"
               />
             </div>
 
