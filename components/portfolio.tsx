@@ -86,7 +86,7 @@ function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4 lg:px-8">
       <nav className={`portfolio-nav mx-auto flex h-14 max-w-[1500px] items-center justify-between rounded-full border px-1 pl-2 shadow-[0_14px_45px_rgba(0,0,0,.16)] backdrop-blur-2xl transition-colors duration-300 sm:px-2 sm:pl-4 ${theme === "dark" ? "border-white/10 bg-[#08090a]/82 text-white" : "border-black/10 bg-[#f4f1eb]/92 text-[#111]"}`}>
         <a href="#top" className="group flex shrink-0 items-center gap-3" aria-label="Alade ADECHI, accueil">
-          <span className="portfolio-logo-mark flex size-7 items-center justify-center rounded-full"><svg viewBox="0 0 28 28" className="size-4" aria-hidden><path d="M4 21 9.5 7h2.8l5.5 14h-3l-1.2-3.2H8.8L7.6 21H4Zm5.7-5.6h3l-1.5-4.2-1.5 4.2ZM17.5 7h3.1c4 0 6.2 2.7 6.2 7s-2.2 7-6.2 7h-3.1V7Zm2.8 2.4v9.2h.5c2.1 0 3.2-1.5 3.2-4.6s-1.1-4.6-3.2-4.6h-.5Z" fill="currentColor"/></svg></span>
+          <span className="portfolio-logo-mark flex size-7 items-center justify-center text-[11px] font-semibold tracking-[-.08em] sm:rounded-full sm:text-[10px]"><span>AD</span></span>
           <span className="hidden sm:flex sm:flex-col sm:gap-0.5"><span className="text-[10px] font-medium tracking-[.04em] text-white/80">Alade ADECHI</span><span className="text-[7px] uppercase tracking-[.16em] text-white/35">Ingénieur IT</span></span>
         </a>
 
@@ -191,7 +191,7 @@ function Nav() {
             aria-expanded={menuOpen}
             aria-controls="mobile-portfolio-menu"
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className={"flex size-10 items-center justify-center rounded-full border transition-colors " + (theme === "dark" ? "border-white/15 text-white" : "border-black/15 text-[#111]")}
+            className={"flex size-10 items-center justify-center border-0 transition-colors md:rounded-full md:border " + (theme === "dark" ? "md:border-white/15 text-white" : "md:border-black/15 text-[#111]")}
           >
             {menuOpen ? <X className="size-4" strokeWidth={1.6} aria-hidden /> : <Menu className="size-4" strokeWidth={1.6} aria-hidden />}
           </button>
@@ -962,7 +962,7 @@ function Contact() {
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-md border-l border-white/10 bg-white px-4 py-2.5 text-[9px] font-medium uppercase tracking-[.13em] text-black transition hover:bg-[#dfe3e8]"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[9px] font-medium uppercase tracking-[.13em] text-black transition hover:bg-[#dfe3e8]"
             >
               RDV
               <CalendarDays className="size-3" />
