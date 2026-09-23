@@ -962,7 +962,7 @@ function Contact() {
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[9px] font-medium uppercase tracking-[.13em] text-black transition hover:bg-[#dfe3e8]"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-4 py-2.5 text-[9px] font-medium uppercase tracking-[.13em] text-white transition hover:border-white/40 hover:bg-white/[.06]"
             >
               RDV
               <CalendarDays className="size-3" />

@@ -171,6 +171,14 @@ html[data-theme="light"] .portfolio-nav [class*="bg-white"] {
   background: #111 !important;
   color: #fff !important;
 }
+
+@media (max-width: 767px) {
+  .portfolio-nav .portfolio-logo-mark {
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+}
 html[data-theme="light"] .portfolio-nav [class*="hover\:text-white"]:hover {
   color: #111 !important;
 }
